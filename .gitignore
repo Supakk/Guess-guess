@@ -1,0 +1,32 @@
+# build output
+.next/
+.open-next/
+out/
+
+# generated types
+next-env.d.ts
+cloudflare-env.d.ts
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# environment variables
+.env
+.env.production
+.dev.vars
+
+# macOS-specific files
+.DS_Store
+
+# jetbrains setting folder
+.idea/
+
+# pre-migration Astro sources, kept for reference only
+.legacy-astro/
+tsconfig.tsbuildinfo
