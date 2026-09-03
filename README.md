@@ -1,4 +1,4 @@
-# I'm Thinking — Morrow Studio site
+# I'm Thinking — Eunyu Studio site
 
 Content-led studio site: services, case studies, insights, and an enquiry form.
 

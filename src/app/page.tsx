@@ -3,7 +3,7 @@ import ContactForm from '@/components/ui/ContactForm';
 import { getPosts, getWork } from '@/lib/content';
 import { principles, serviceDetails } from '@/lib/site';
 
-const services = ['Brand direction', 'Websites & digital products', 'Design systems'];
+const services = ['UX/UI design', 'Design-to-code (Figma & images)', 'Frontend redesign & development'];
 
 export default async function HomePage() {
 	const [projects, posts] = await Promise.all([getWork(), getPosts()]);
@@ -11,7 +11,7 @@ export default async function HomePage() {
 	return (
 		<>
 			<section className="container pb-28 pt-20 md:pb-40 md:pt-36">
-				<p className="eyebrow reveal">Independent digital studio / Bangkok</p>
+				<p className="eyebrow reveal">UX/UI design & frontend development / Bangkok</p>
 				<h1 className="display reveal mt-8 max-w-5xl">
 					Useful things,
 					<br />
@@ -19,7 +19,7 @@ export default async function HomePage() {
 				</h1>
 				<div className="mt-12 flex flex-col justify-between gap-8 border-t border-[#332c22] pt-5 md:flex-row">
 					<p className="reveal max-w-sm text-lg leading-7 text-[#a89a86]">
-						We help ambitious people turn complex ideas into clear, confident digital experiences.
+						We turn Figma files and reference designs into fast, faithful, production-ready frontends.
 					</p>
 					<a
 						className="glass reveal w-fit rounded-full px-5 py-3 text-sm transition-colors hover:bg-[#c1734a]/30"
@@ -105,8 +105,8 @@ export default async function HomePage() {
 					Small by design. Serious about outcomes.
 				</h2>
 				<p className="mt-4 text-[#a89a86]">
-					Morrow is an independent practice for brand, product, and web. We bring strategy and craft into the same
-					room.
+					Eunyu is an independent practice for UX/UI design and frontend development. We turn Figma files and
+					reference designs into fast, faithful, production-ready interfaces.
 				</p>
 				<div className="mt-8 space-y-5 text-xl leading-tight">
 					{principles.map((principle) => (

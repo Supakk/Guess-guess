@@ -4,7 +4,7 @@ import { serviceDetails } from '@/lib/site';
 
 export const metadata: Metadata = {
 	title: 'Services',
-	description: 'Flexible support for teams who care about the work and the people it serves.',
+	description: 'UX/UI design and frontend development — from Figma handoff to a shipped, responsive interface.',
 	alternates: { canonical: '/services' },
 };
 
@@ -14,7 +14,7 @@ export default function ServicesPage() {
 			<SectionIntro
 				eyebrow="Services"
 				title="From first question to final pixel."
-				body="Flexible support for teams who care about the work and the people it serves."
+				body="UX/UI design and frontend development — from Figma handoff to a shipped, responsive interface."
 			/>
 			<div className="mt-16 grid gap-12 sm:mt-24 md:grid-cols-3">
 				{serviceDetails.map((service, index) => (

@@ -3,7 +3,7 @@ import ContactForm from '@/components/ui/ContactForm';
 
 export const metadata: Metadata = {
 	title: 'Contact',
-	description: 'Tell us what you are thinking. Start a project with Morrow Studio.',
+	description: 'Tell us what you are thinking. Start a project with Eunyu Studio.',
 	alternates: { canonical: '/contact' },
 };
 

@@ -4,7 +4,7 @@ import { principles } from '@/lib/site';
 
 export const metadata: Metadata = {
 	title: 'About',
-	description: 'Morrow is an independent practice for brand, product, and web.',
+	description: 'Eunyu is an independent practice for UX/UI design and frontend development.',
 	alternates: { canonical: '/about' },
 };
 
@@ -14,7 +14,7 @@ export default function AboutPage() {
 			<SectionIntro
 				eyebrow="About"
 				title="Small by design. Serious about outcomes."
-				body="Morrow is an independent practice for brand, product, and web. We bring strategy and craft into the same room."
+				body="Eunyu is an independent practice for UX/UI design and frontend development. We turn Figma files and reference designs into fast, faithful, production-ready interfaces."
 			/>
 			<div className="mt-16 grid gap-12 border-t border-[#332c22] pt-6 sm:mt-24 md:grid-cols-2">
 				<p className="eyebrow">Principles</p>

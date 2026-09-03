@@ -55,14 +55,14 @@ export default function SiteHeader() {
 
 	const expanded = !scrolled || manuallyOpen;
 	const wordmark = (
-		<span className={`transition-colors duration-300 ${onLight ? 'text-[#15120d]' : 'text-[#f6f0e6]'}`}>morrow</span>
+		<span className={`transition-colors duration-300 ${onLight ? 'text-[#15120d]' : 'text-[#f6f0e6]'}`}>eunyu</span>
 	);
 
 	return (
 		<div className="container sticky top-4 z-50 pt-4">
 			<header className="glass glass-nav flex w-fit max-w-full items-center rounded-full px-5 py-3 md:px-6">
 				{expanded ? (
-					<Link href="/" className="text-lg font-semibold tracking-tight" aria-label="Morrow Studio home">
+					<Link href="/" className="text-lg font-semibold tracking-tight" aria-label="Eunyu Studio home">
 						{wordmark}
 						<span className="text-[#c1734a]">.</span>
 					</Link>
