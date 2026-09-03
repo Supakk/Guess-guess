@@ -30,3 +30,4 @@ pnpm-debug.log*
 # pre-migration Astro sources, kept for reference only
 .legacy-astro/
 tsconfig.tsbuildinfo
+.vercel

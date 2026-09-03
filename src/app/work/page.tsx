@@ -14,10 +14,10 @@ export default async function WorkIndexPage() {
 	return (
 		<section className="container py-20 md:py-32">
 			<p className="eyebrow">Selected work</p>
-			<h1 className="mt-8 max-w-3xl text-6xl font-medium leading-[0.92] tracking-[-0.05em] md:text-8xl">
+			<h1 className="mt-8 max-w-3xl text-4xl font-medium leading-[0.95] tracking-[-0.03em] sm:text-6xl sm:leading-[0.92] sm:tracking-[-0.05em] md:text-8xl">
 				Ideas made tangible.
 			</h1>
-			<div className="mt-24 grid gap-x-8 gap-y-16 md:grid-cols-2">
+			<div className="mt-16 grid gap-x-8 gap-y-16 sm:mt-24 md:grid-cols-2">
 				{projects.map((project) => (
 					<Link key={project.slug} href={`/work/${project.slug}`} className="work-card group" data-reveal>
 						<div className="relative aspect-[4/3] bg-[#c1734a] p-6 text-[#15120d]">

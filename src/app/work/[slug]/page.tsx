@@ -31,10 +31,10 @@ export default async function WorkDetailPage({ params }: Params) {
 			<p className="eyebrow">
 				{project.data.client} / {project.data.year}
 			</p>
-			<h1 className="mt-8 max-w-4xl text-6xl font-medium leading-[0.92] tracking-[-0.05em] md:text-8xl">
+			<h1 className="mt-8 max-w-4xl text-4xl font-medium leading-[0.95] tracking-[-0.03em] sm:text-6xl sm:leading-[0.92] sm:tracking-[-0.05em] md:text-8xl">
 				{project.data.title}
 			</h1>
-			<div className="mt-20 max-w-2xl text-lg leading-8 text-[#a89a86]">
+			<div className="mt-12 max-w-2xl text-lg leading-8 text-[#a89a86] sm:mt-20">
 				<Mdx source={project.body} />
 			</div>
 		</article>
