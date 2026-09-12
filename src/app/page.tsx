@@ -15,17 +15,17 @@ export default async function HomePage() {
 				<h1 className="display reveal mt-8 max-w-5xl">
 					Useful things,
 					<br />
-					<em className="font-serif not-italic text-[#a15c34]">beautifully</em> made.
+					<em className="font-pixel not-italic text-[#a15c34]">beautifully</em> made.
 				</h1>
 				<div className="mt-12 flex flex-col justify-between gap-8 border-t border-[#332c22] pt-5 md:flex-row">
 					<p className="reveal max-w-sm text-lg leading-7 text-[#a89a86]">
 						We turn Figma files and reference designs into fast, faithful, production-ready frontends.
 					</p>
 					<a
-						className="glass reveal w-fit rounded-full px-5 py-3 text-sm transition-colors hover:bg-[#c1734a]/30"
+						className="glass reveal w-fit rounded-full px-5 py-4 text-sm transition-colors hover:bg-[#c1734a]/30"
 						href="/work"
 					>
-						See selected work <span aria-hidden="true">↗</span>
+						See selected work
 					</a>
 				</div>
 			</section>
@@ -52,7 +52,7 @@ export default async function HomePage() {
 						Good work starts with a good question.
 					</h2>
 					<a href="/about" className="h-fit text-sm underline underline-offset-8">
-						More about us ↗
+						More about us
 					</a>
 				</div>
 			</section>
@@ -84,12 +84,12 @@ export default async function HomePage() {
 				<div className="mt-10 grid gap-10">
 					{projects.map((project) => (
 						<Link key={project.slug} href={`/work/${project.slug}`} className="work-card group" data-reveal>
-							<div className="relative aspect-[4/3] bg-[#c1734a] p-6 text-[#15120d]">
+							<div className="relative aspect-4/3 bg-[#c1734a] p-6 text-[#15120d]">
 								<span className="glass-light absolute left-6 top-6 rounded-full px-3 py-1 text-sm">
 									{project.data.year}
 								</span>
 								<div className="flex h-full items-end">
-									<span className="text-3xl tracking-tight">{project.data.client} ↗</span>
+									<span className="text-3xl tracking-tight">{project.data.client}</span>
 								</div>
 							</div>
 							<h3 className="mt-4 text-lg">{project.data.title}</h3>

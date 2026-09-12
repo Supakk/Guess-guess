@@ -14,7 +14,7 @@ export default async function BlogIndexPage() {
 	return (
 		<section className="container py-20 md:py-32">
 			<p className="eyebrow">Insights</p>
-			<h1 className="mt-8 max-w-3xl text-4xl font-medium leading-[0.95] tracking-[-0.03em] sm:text-6xl sm:leading-[0.92] sm:tracking-[-0.05em] md:text-8xl">
+			<h1 className="mt-8 max-w-3xl text-4xl font-medium leading-[0.95] tracking-[-0.03em] sm:text-6xl sm:leading-[0.92] sm:tracking-tighter md:text-8xl">
 				Notes from the practice.
 			</h1>
 			<div className="mt-16 max-w-3xl sm:mt-24">

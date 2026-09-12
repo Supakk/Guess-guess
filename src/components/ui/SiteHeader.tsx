@@ -95,7 +95,7 @@ export default function SiteHeader() {
 						href="/contact"
 						className="whitespace-nowrap text-sm underline underline-offset-8 transition-colors hover:text-[#c1734a]"
 					>
-						Start a project <span aria-hidden="true">↗</span>
+						Start a project
 					</Link>
 				</div>
 			</header>

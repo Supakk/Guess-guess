@@ -15,6 +15,7 @@ export default function AboutPage() {
 				eyebrow="About"
 				title="Small by design. Serious about outcomes."
 				body="Eunyu is an independent practice for UX/UI design and frontend development. We turn Figma files and reference designs into fast, faithful, production-ready interfaces."
+				media="/Eunyu.png"
 			/>
 			<div className="mt-16 grid gap-12 border-t border-[#332c22] pt-6 sm:mt-24 md:grid-cols-2">
 				<p className="eyebrow">Principles</p>

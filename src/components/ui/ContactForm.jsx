@@ -16,7 +16,7 @@ export default function ContactForm({ className = '' }) {
 				<textarea className={`min-h-32 ${field}`} name="message" required />
 			</label>
 			<button className="mt-4 w-fit rounded-full bg-[#f6f0e6] px-6 py-3 text-sm text-[#15120d] hover:bg-[#c1734a]" type="submit">
-				Send enquiry ↗
+				Send enquiry
 			</button>
 		</form>
 	);
