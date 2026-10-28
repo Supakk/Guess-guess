@@ -4,7 +4,7 @@ import { getWork } from '@/lib/content';
 
 export const metadata: Metadata = {
 	title: 'Work',
-	description: 'Selected case studies — ideas made tangible.',
+	description: 'Case studies — the problem, how we diagnosed it, and what got better.',
 	alternates: { canonical: '/work' },
 };
 
@@ -13,9 +13,9 @@ export default async function WorkIndexPage() {
 
 	return (
 		<section className="container py-20 md:py-32">
-			<p className="eyebrow">Selected work</p>
+			<p className="eyebrow">Case studies</p>
 			<h1 className="mt-8 max-w-3xl text-4xl font-medium leading-[0.95] tracking-[-0.03em] sm:text-6xl sm:leading-[0.92] sm:tracking-tighter md:text-8xl">
-				Ideas made tangible.
+				Problems we&apos;ve solved.
 			</h1>
 			<div className="mt-16 grid gap-x-8 gap-y-16 sm:mt-24 md:grid-cols-2">
 				{projects.map((project) => (
@@ -30,8 +30,9 @@ export default async function WorkIndexPage() {
 								</span>
 							</div>
 						</div>
-						<h2 className="mt-4 text-xl">{project.data.title}</h2>
-						<p className="mt-1 text-sm text-[#a89a86]">{project.data.tags.join(' / ')}</p>
+						<h2 className="mt-4 text-xl">{project.data.problem}</h2>
+						<p className="mt-1 text-[#a89a86]">{project.data.summary}</p>
+						<p className="mt-2 text-sm text-[#a89a86]">{project.data.tags.join(' / ')}</p>
 					</Link>
 				))}
 			</div>
