@@ -37,7 +37,7 @@ export default async function HomePage() {
 							<div key={service.title} className="border-t border-[#e3dbcb] pt-5" data-reveal>
 								<span className="text-sm text-[#a15c34]">0{index + 1}</span>
 								<h2 className="mt-16 text-2xl">{service.problem}</h2>
-									<p className="mt-3 text-sm text-[#7d7364]">{service.title}</p>
+								<p className="mt-3 text-sm text-[#7d7364]">{service.title}</p>
 							</div>
 						))}
 					</div>
@@ -66,7 +66,7 @@ export default async function HomePage() {
 						<article key={service.title} data-reveal>
 							<span className="text-sm text-[#a15c34]">0{index + 1}</span>
 							<h3 className="mt-3 text-xl">{service.problem}</h3>
-								<p className="mt-1 text-sm text-[#a15c34]">{service.title}</p>
+							<p className="mt-1 text-sm text-[#a15c34]">{service.title}</p>
 							<p className="mt-2 leading-7 text-[#a89a86]">{service.body}</p>
 						</article>
 					))}
