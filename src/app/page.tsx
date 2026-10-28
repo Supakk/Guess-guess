@@ -11,9 +11,9 @@ export default async function HomePage() {
 			<section className="container pb-28 pt-20 md:pb-40 md:pt-36">
 				<p className="eyebrow reveal">UX/UI design & frontend development / Bangkok</p>
 				<h1 className="display reveal mt-8 max-w-5xl">
-					We solve
+					Useful things,
 					<br />
-					<em className="font-pixel not-italic text-[#a15c34]">problems</em>, not pages.
+					<em className="font-pixel not-italic text-[#a15c34]">beautifully</em> made.
 				</h1>
 				<div className="mt-12 flex flex-col justify-between gap-8 border-t border-[#332c22] pt-5 md:flex-row">
 					<p className="reveal max-w-sm text-lg leading-7 text-[#a89a86]">
