@@ -10,6 +10,7 @@ const workSchema = z.object({
 	client: z.string(),
 	year: z.number(),
 	summary: z.string(),
+	problem: z.string(),
 	tags: z.array(z.string()),
 });
 
