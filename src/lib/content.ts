@@ -12,6 +12,10 @@ const workSchema = z.object({
 	summary: z.string(),
 	problem: z.string(),
 	tags: z.array(z.string()),
+	/** `in-progress` work gets a placeholder card that links to `repo`, and no case study page yet. */
+	status: z.enum(['live', 'in-progress']).default('live'),
+	/** Where an in-progress project is, e.g. { step: 1, of: 5, label: 'Notch window and playback' }. */
+	progress: z.object({ step: z.number(), of: z.number(), label: z.string() }).optional(),
 	/** Live site and source code, shown as links on the case study. */
 	url: z.url().optional(),
 	repo: z.url().optional(),
@@ -79,7 +83,15 @@ async function readCollection<C extends Collection>(collection: C): Promise<Entr
 
 export async function getWork(): Promise<WorkEntry[]> {
 	const entries = await readCollection('work');
-	return entries.sort((a, b) => b.data.year - a.data.year);
+	// Finished work first, then newest first.
+	return entries.sort(
+		(a, b) => Number(a.data.status === 'in-progress') - Number(b.data.status === 'in-progress') || b.data.year - a.data.year,
+	);
+}
+
+/** Work that has a case study page (everything except in-progress placeholders). */
+export async function getCaseStudies(): Promise<WorkEntry[]> {
+	return (await getWork()).filter((entry) => entry.data.status === 'live');
 }
 
 export async function getPosts(): Promise<BlogEntry[]> {

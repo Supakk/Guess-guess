@@ -1,10 +1,10 @@
-import { getPosts, getWork } from '@/lib/content';
+import { getCaseStudies, getPosts } from '@/lib/content';
 import { site } from '@/lib/site';
 
 export const dynamic = 'force-static';
 
 export async function GET() {
-	const [posts, projects] = await Promise.all([getPosts(), getWork()]);
+	const [posts, projects] = await Promise.all([getPosts(), getCaseStudies()]);
 	const now = new Date();
 
 	const entries = [

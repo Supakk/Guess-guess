@@ -3,18 +3,18 @@ import { notFound } from 'next/navigation';
 import Mdx from '@/components/mdx/Mdx';
 import AutoVideo from '@/components/ui/AutoVideo';
 import ProjectOverview from '@/components/ui/ProjectOverview';
-import { getEntry, getWork } from '@/lib/content';
+import { getCaseStudies, getEntry } from '@/lib/content';
 
 type Params = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
-	return (await getWork()).map((project) => ({ slug: project.slug }));
+	return (await getCaseStudies()).map((project) => ({ slug: project.slug }));
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
 	const { slug } = await params;
 	const project = await getEntry('work', slug);
-	if (!project) return {};
+	if (!project || project.data.status !== 'live') return {};
 	return {
 		title: project.data.title,
 		description: project.data.summary,
@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 export default async function WorkDetailPage({ params }: Params) {
 	const { slug } = await params;
 	const project = await getEntry('work', slug);
-	if (!project) notFound();
+	if (!project || project.data.status !== 'live') notFound();
 
 	const gallery = project.data.videos;
 	const arrow = (
