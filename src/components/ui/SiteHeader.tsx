@@ -80,20 +80,25 @@ export default function SiteHeader() {
 				)}
 
 				<div
-					className={`hidden items-center gap-7 overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:flex ${
-						expanded ? 'ml-14 max-w-140 opacity-100' : 'ml-0 max-w-0 opacity-0'
+					className={`hidden items-center gap-7 overflow-hidden transition-[max-width,margin,opacity,filter] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] md:flex ${
+						expanded ? 'ml-14 max-w-140 opacity-100 blur-none' : 'ml-0 max-w-0 opacity-0 blur-[2px]'
 					}`}
 				>
 					<nav className="flex gap-7 whitespace-nowrap text-sm" aria-label="Main navigation">
 						{navItems.map((item) => (
-							<Link key={item.href} href={item.href} className="transition-colors hover:text-[#c1734a]">
+							<Link
+								key={item.href}
+								href={item.href}
+								className="link-sweep transition-colors duration-300 hover:text-[#c1734a]"
+								aria-current={pathname.startsWith(item.href) ? 'page' : undefined}
+							>
 								{item.label}
 							</Link>
 						))}
 					</nav>
 					<Link
 						href="/contact"
-						className="whitespace-nowrap text-sm underline underline-offset-8 transition-colors hover:text-[#c1734a]"
+						className="link-sweep is-underlined whitespace-nowrap text-sm transition-colors duration-300 hover:text-[#c1734a]"
 					>
 						Start a project
 					</Link>

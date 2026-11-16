@@ -9,20 +9,86 @@
 	font-family: "Avenir Next", "Helvetica Neue", sans-serif;
 	color: var(--paper);
 	background: var(--ink);
+	/* Easing used everywhere: a long, soft ease-out, and a springy one with a touch of overshoot. */
+	--ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+	--ease-spring: cubic-bezier(0.34, 1.2, 0.64, 1);
 }
 
 html { scroll-behavior: smooth; }
+/* Lenis owns scrolling on desktop: native smooth-scroll would fight its interpolation. */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: clip; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
 body { margin: 0; min-width: 320px; background: var(--ink); }
 a { color: inherit; text-decoration: none; }
 .container { width: min(1520px, calc(100% - 64px)); margin-inline: auto; }
 .font-pixel { font-family: var(--font-pixel), "Courier New", monospace; letter-spacing: 0; font-weight: 600; }
 .eyebrow { color: var(--muted); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
 .display { font-size: clamp(3.5rem, 9vw, 8.5rem); font-weight: 500; letter-spacing: -0.06em; line-height: 0.9; }
-.reveal { opacity: 0; transform: translateY(32px) scale(0.98); }
-[data-reveal] { opacity: 0; transform: translateY(36px) scale(0.97); }
 
-.work-card { transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
+/* Reveals: hidden only once the inline script in layout.tsx has marked the page (JS on, motion
+   allowed), so content never waits on JS. Motion.tsx springs each one in and adds .is-in. */
+.js-motion .reveal:not(.is-in),
+.js-motion [data-reveal]:not(.is-in) { opacity: 0; }
+
+.work-card { transition: transform 0.7s var(--ease-out), box-shadow 0.7s var(--ease-out); }
 .work-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -24px rgb(21 18 13 / 0.35); }
+.work-card:active { transform: translateY(-2px) scale(0.985); transition-duration: 0.15s; }
+.work-card .card-face { transition: transform 0.8s var(--ease-out); }
+.work-card:hover .card-face { transform: scale(1.015); }
+.work-card .card-title { transition: translate 0.6s var(--ease-spring); }
+.work-card:hover .card-title { translate: 8px 0; }
+
+/* Press feedback: a quick squeeze down, a slow soft release. */
+.press { transition: transform 0.5s var(--ease-out), background-color 0.4s var(--ease-out), color 0.4s var(--ease-out); }
+.press:active { transform: scale(0.96); transition-duration: 0.12s; }
+
+/* Underline that sweeps in from the left and out to the right. */
+.link-sweep { position: relative; }
+.link-sweep::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: -6px;
+	height: 1px;
+	background: currentColor;
+	transform: scaleX(0);
+	transform-origin: right;
+	transition: transform 0.6s var(--ease-out);
+}
+.link-sweep:hover::after, .link-sweep:focus-visible::after, .link-sweep[aria-current="page"]::after { transform: scaleX(1); transform-origin: left; }
+/* Variant for links that are underlined at rest: the line wipes out, then back in. */
+.link-sweep.is-underlined::after { transform: scaleX(1); transform-origin: left; }
+.link-sweep.is-underlined:hover::after { animation: line-rewipe 0.9s var(--ease-out); }
+@keyframes line-rewipe {
+	0% { transform: scaleX(1); transform-origin: right; }
+	45% { transform: scaleX(0); transform-origin: right; }
+	46% { transform: scaleX(0); transform-origin: left; }
+	100% { transform: scaleX(1); transform-origin: left; }
+}
+
+/* CTA: on hover the label slides over and an arrow glides in, coming into focus. */
+.btn-arrow { display: inline-flex; align-items: center; gap: 0; }
+.btn-arrow > .ba-label { transition: translate 0.5s var(--ease-out); }
+.btn-arrow > .ba-icon {
+	display: inline-grid;
+	place-items: center;
+	width: 0;
+	opacity: 0;
+	translate: -10px 0;
+	filter: blur(4px);
+	transition: width 0.5s var(--ease-out), opacity 0.3s var(--ease-out), translate 0.5s var(--ease-spring), filter 0.3s var(--ease-out);
+}
+.btn-arrow:hover > .ba-icon, .btn-arrow:focus-visible > .ba-icon {
+	width: 1.5em;
+	opacity: 1;
+	translate: 0 0;
+	filter: none;
+	transition-delay: 0.04s;
+}
 
 /* Liquid glass — frosted, translucent surfaces with a soft specular edge. */
 .glass {
@@ -45,13 +111,14 @@ a { color: inherit; text-decoration: none; }
 	.glass-light { background: rgb(246 240 230 / 0.92); }
 }
 
-.glass-nav { transition: background 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease; }
+.glass-nav { transition: background 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out), border-color 0.5s var(--ease-out); }
 
-/* Route transition — fade + subtle translate, keyed on pathname. */
-.route-fade { animation: route-fade 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; }
+/* Route transition — fade, rise and come into focus, keyed on pathname. Uses `translate` (not
+   `transform`) and ends on `none` so it never leaves a containing block behind for sticky/fixed. */
+.route-fade { animation: route-fade 0.8s var(--ease-out) both; }
 @keyframes route-fade {
-	from { opacity: 0; transform: translateY(10px); }
-	to { opacity: 1; transform: none; }
+	from { opacity: 0; translate: 0 14px; filter: blur(6px); }
+	to { opacity: 1; translate: none; filter: none; }
 }
 
 @media (max-width: 640px) {
@@ -61,7 +128,9 @@ a { color: inherit; text-decoration: none; }
 
 @media (prefers-reduced-motion: reduce) {
 	html { scroll-behavior: auto; }
-	.reveal, [data-reveal] { opacity: 1; transform: none; }
+	*, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+	.reveal, [data-reveal] { opacity: 1; }
 	.route-fade { animation: none; }
-	.work-card:hover { transform: none; }
+	.work-card:hover, .work-card:active, .work-card:hover .card-face { transform: none; }
+	.work-card:hover .card-title { translate: none; }
 }

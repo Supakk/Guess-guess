@@ -1,6 +1,6 @@
 export default function SectionIntro({ eyebrow, title, body, media = '' }) {
 	return (
-		<div className="grid gap-5 md:grid-cols-[1fr_2fr]" data-reveal>
+		<div className="reveal grid gap-5 md:grid-cols-[1fr_2fr]">
 			<div>
 				<p className="eyebrow">{eyebrow}</p>
 				{media && (

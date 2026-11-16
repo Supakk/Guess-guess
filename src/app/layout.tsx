@@ -34,7 +34,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang="en" className={pixelFont.variable}>
+		<html lang="en" className={pixelFont.variable} suppressHydrationWarning>
+			<head>
+				{/* Before first paint: mark the page so reveal targets start hidden, but only when JS runs
+				    and motion is allowed — otherwise content shows as-is. See .js-motion in global.css. */}
+				<script
+					dangerouslySetInnerHTML={{
+						__html: "if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('js-motion')",
+					}}
+				/>
+			</head>
 			<body>
 				<SiteHeader />
 				<RouteTransition>{children}</RouteTransition>

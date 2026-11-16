@@ -28,13 +28,13 @@ export default async function BlogPostPage({ params }: Params) {
 
 	return (
 		<article className="container py-20 md:py-32">
-			<p className="eyebrow">
+			<p className="eyebrow reveal">
 				{post.data.published.toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}
 			</p>
-			<h1 className="mt-8 max-w-4xl text-4xl font-medium leading-[0.95] tracking-[-0.03em] sm:text-6xl sm:leading-[0.92] sm:tracking-tighter md:text-8xl">
+			<h1 className="reveal mt-8 max-w-4xl text-4xl font-medium leading-[0.95] tracking-[-0.03em] sm:text-6xl sm:leading-[0.92] sm:tracking-tighter md:text-8xl">
 				{post.data.title}
 			</h1>
-			<div className="mt-12 max-w-2xl text-lg leading-8 text-[#a89a86] sm:mt-20">
+			<div className="reveal mt-12 max-w-2xl text-lg leading-8 text-[#a89a86] sm:mt-20">
 				<Mdx source={post.body} />
 			</div>
 		</article>

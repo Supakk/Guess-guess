@@ -2,16 +2,21 @@
 
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
+import { EASE_OUT, ENTER, SOFT, prefersReducedMotion, type SpringEase } from '@/lib/motion';
 
 /**
- * GSAP reveals + Lenis smooth scroll, re-run on every client navigation.
+ * Spring reveals (GSAP) + Lenis smooth scroll, re-run on every client navigation.
  * Lenis is desktop-only and both are skipped under prefers-reduced-motion.
+ *
+ * Elements marked `.reveal` (above the fold) spring in on load; `[data-reveal]` ones spring in as
+ * they scroll into view. Each rises on a spring while fading in and coming into focus (un-blur),
+ * then hands itself back to its stylesheet so hover transforms keep working.
  */
 export default function Motion() {
 	const pathname = usePathname();
 
 	useEffect(() => {
-		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+		if (prefersReducedMotion()) return;
 
 		let cleanup: (() => void) | undefined;
 		let cancelled = false;
@@ -24,19 +29,49 @@ export default function Motion() {
 			if (cancelled) return;
 
 			gsap.registerPlugin(ScrollTrigger);
+
+			/** Rise on a spring, fade + un-blur on a long ease-out, then clear the inline styles. */
+			const arrive = (
+				targets: Element[],
+				{ preset = ENTER, lift = 28, scale = 1, stagger = 0.08, delay = 0 }: {
+					preset?: SpringEase;
+					lift?: number;
+					scale?: number;
+					stagger?: number;
+					delay?: number;
+				} = {},
+			) => {
+				if (!targets.length) return;
+				// .is-in lifts the CSS "hidden until revealed" rule; fromTo renders its start values
+				// synchronously, so the element never paints in its final state first.
+				targets.forEach((el) => el.classList.add('is-in'));
+				gsap.fromTo(
+					targets,
+					{ y: lift, scale },
+					{ y: 0, scale: 1, duration: preset.duration, ease: preset.ease, stagger, delay, clearProps: 'transform' },
+				);
+				gsap.fromTo(
+					targets,
+					{ opacity: 0, filter: 'blur(8px)' },
+					{ opacity: 1, filter: 'blur(0px)', duration: 1, ease: EASE_OUT, stagger, delay, clearProps: 'opacity,filter' },
+				);
+			};
+
 			const context = gsap.context(() => {
-				gsap.to('.reveal', { opacity: 1, y: 0, scale: 1, duration: 0.9, stagger: 0.1, ease: 'power3.out' });
+				const intro = gsap.utils.toArray<HTMLElement>('.reveal');
+				arrive(intro, { preset: ENTER, lift: 32, stagger: 0.09, delay: 0.05 });
 
 				ScrollTrigger.batch('[data-reveal]', {
-					start: 'top 85%',
+					start: 'top 88%',
+					once: true,
+					// Anything already on screen waits for the intro to get going first.
 					onEnter: (elements) =>
-						gsap.to(elements, {
-							opacity: 1,
-							y: 0,
-							scale: 1,
-							duration: 0.8,
-							stagger: 0.12,
-							ease: 'power3.out',
+						arrive(elements, {
+							preset: SOFT,
+							lift: 36,
+							scale: 0.97,
+							stagger: 0.07,
+							delay: intro.length && ScrollTrigger.isInViewport(elements[0]) ? 0.25 : 0,
 						}),
 				});
 			});
@@ -44,6 +79,9 @@ export default function Motion() {
 			const desktopQuery = window.matchMedia('(min-width: 768px)');
 			let lenis: import('lenis').default | undefined;
 			let LenisCtor: typeof import('lenis').default | undefined;
+			// Drive Lenis from GSAP's ticker so scroll position and ScrollTrigger update on the very
+			// same frame — two separate rAF loops drift and read as micro-stutter.
+			const tick = (time: number) => lenis?.raf(time * 1000);
 
 			const startLenis = async () => {
 				if (lenis) return;
@@ -51,10 +89,18 @@ export default function Motion() {
 					({ default: LenisCtor } = await import('lenis'));
 				}
 				if (cancelled || lenis) return;
-				lenis = new LenisCtor({ autoRaf: true });
+				lenis = new LenisCtor({
+					lerp: 0.085, // a touch more glide than the 0.1 default
+					wheelMultiplier: 1,
+					anchors: { offset: -96 }, // in-page links glide too, landing below the floating nav
+				});
 				lenis.on('scroll', ScrollTrigger.update);
+				gsap.ticker.add(tick);
+				gsap.ticker.lagSmoothing(0);
 			};
 			const stopLenis = () => {
+				gsap.ticker.remove(tick);
+				gsap.ticker.lagSmoothing(500, 33);
 				lenis?.destroy();
 				lenis = undefined;
 			};
@@ -85,6 +131,7 @@ export default function Motion() {
 			if (desktopQuery.matches) {
 				await startLenis();
 				if (cancelled) {
+					stopLenis();
 					context.revert();
 					return;
 				}

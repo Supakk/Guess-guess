@@ -19,12 +19,15 @@ export default async function HomePage() {
 					<p className="reveal max-w-sm text-lg leading-7 text-[#a89a86]">
 						We find what is actually broken in your product experience — then design and build the fix.
 					</p>
-					<a
-						className="glass reveal w-fit rounded-full px-5 py-4 text-sm transition-colors hover:bg-[#c1734a]/30"
+					<Link
+						className="glass reveal press btn-arrow w-fit rounded-full px-5 py-4 text-sm hover:bg-[#c1734a]/30"
 						href="/work"
 					>
-						See problems we've solved
-					</a>
+						<span className="ba-label">See problems we&apos;ve solved</span>
+						<span className="ba-icon" aria-hidden="true">
+							<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5" /></svg>
+						</span>
+					</Link>
 				</div>
 			</section>
 
@@ -47,12 +50,12 @@ export default async function HomePage() {
 			<section className="container hidden py-24 md:block md:py-32">
 				<p className="eyebrow">How we work</p>
 				<div className="mt-8 flex flex-col justify-between gap-8 md:flex-row">
-					<h2 className="max-w-2xl text-4xl font-medium leading-tight tracking-[-0.04em] md:text-6xl">
+					<h2 className="max-w-2xl text-4xl font-medium leading-tight tracking-[-0.04em] md:text-6xl" data-reveal>
 						Good work starts with naming the real problem.
 					</h2>
-					<a href="/about" className="h-fit text-sm underline underline-offset-8">
+					<Link href="/about" className="link-sweep is-underlined h-fit text-sm">
 						More about us
-					</a>
+					</Link>
 				</div>
 			</section>
 
@@ -79,12 +82,12 @@ export default async function HomePage() {
 				<div className="mt-10 grid gap-10">
 					{projects.map((project) => (
 						<Link key={project.slug} href={`/work/${project.slug}`} className="work-card group" data-reveal>
-							<div className="relative aspect-4/3 bg-[#c1734a] p-6 text-[#15120d]">
+							<div className="card-face relative aspect-4/3 bg-[#c1734a] p-6 text-[#15120d]">
 								<span className="glass-light absolute left-6 top-6 rounded-full px-3 py-1 text-sm">
 									{project.data.year}
 								</span>
 								<div className="flex h-full items-end">
-									<span className="text-3xl tracking-tight">{project.data.client}</span>
+									<span className="card-title text-3xl tracking-tight">{project.data.client}</span>
 								</div>
 							</div>
 							<h3 className="mt-4 text-lg">{project.data.problem}</h3>
