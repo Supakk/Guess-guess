@@ -5,7 +5,7 @@ year: 2026
 summary: A free, in-browser house designer that turns "I can't picture it" into a plan, a 3D model and a rule check.
 problem: People planning a home couldn't see it — or know if it was allowed — until they paid an architect.
 tags: [UX/UI, Frontend, 3D]
-url: https://cloved-builds.vercel.app
+url: https://cloved-build.vercel.app
 repo: https://github.com/Supakk/ClovedBuild
 cover: /work/clovedbuild/cover.jpg
 stack: [Astro, React, Tailwind CSS, three.js, Motion]
@@ -62,4 +62,4 @@ Under the hood: Astro, React, Tailwind CSS and three.js, with spring animation (
 
 ## The result
 
-A free tool anyone can open in a browser and use to go from a plot size to a checked, 3D house design in one sitting — and arrive at an architect with a concrete brief instead of a vague idea. It's live at [cloved-builds.vercel.app](https://cloved-builds.vercel.app), and the code is on [GitHub](https://github.com/Supakk/ClovedBuild).
+A free tool anyone can open in a browser and use to go from a plot size to a checked, 3D house design in one sitting — and arrive at an architect with a concrete brief instead of a vague idea. It's live at [cloved-build.vercel.app](https://cloved-build.vercel.app), and the code is on [GitHub](https://github.com/Supakk/ClovedBuild).
