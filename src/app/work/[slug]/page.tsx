@@ -4,6 +4,7 @@ import Mdx from '@/components/mdx/Mdx';
 import AutoVideo from '@/components/ui/AutoVideo';
 import ProjectOverview from '@/components/ui/ProjectOverview';
 import { getCaseStudies, getEntry } from '@/lib/content';
+import { site } from '@/lib/site';
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -19,7 +20,15 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 		title: project.data.title,
 		description: project.data.summary,
 		alternates: { canonical: `/work/${slug}` },
-		openGraph: { type: 'article', title: project.data.title, description: project.data.summary },
+		// A page-level openGraph replaces the layout's, so restate the image: the project's cover, else the site card.
+		openGraph: {
+			type: 'article',
+			title: project.data.title,
+			description: project.data.summary,
+			url: `/work/${slug}`,
+			images: [project.data.cover ?? site.ogImage],
+		},
+		twitter: { card: 'summary_large_image', images: [project.data.cover ?? site.ogImage] },
 	};
 }
 

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Mdx from '@/components/mdx/Mdx';
 import { getEntry, getPosts } from '@/lib/content';
+import { site } from '@/lib/site';
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -17,7 +18,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 		title: post.data.title,
 		description: post.data.summary,
 		alternates: { canonical: `/blog/${slug}` },
-		openGraph: { type: 'article', title: post.data.title, description: post.data.summary },
+		openGraph: { type: 'article', title: post.data.title, description: post.data.summary, url: `/blog/${slug}`, images: [site.ogImage] },
 	};
 }
 
