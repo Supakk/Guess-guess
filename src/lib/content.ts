@@ -12,6 +12,28 @@ const workSchema = z.object({
 	summary: z.string(),
 	problem: z.string(),
 	tags: z.array(z.string()),
+	/** Live site and source code, shown as links on the case study. */
+	url: z.url().optional(),
+	repo: z.url().optional(),
+	/** Still image for the work card and the case study overview. */
+	cover: z.string().optional(),
+	/** Tools the project was built with, listed in the overview card. */
+	stack: z.array(z.string()).default([]),
+	/** The few things that matter most about the project, listed in the overview card. */
+	highlights: z.array(z.object({ title: z.string(), body: z.string() })).default([]),
+	/** Short numbers shown under the highlights, e.g. { value: '26', label: 'house styles' }. */
+	facts: z.array(z.object({ value: z.string(), label: z.string() })).default([]),
+	/** Screen recordings under /public, shown in the "Inside the product" gallery. */
+	videos: z
+		.array(
+			z.object({
+				src: z.string(),
+				poster: z.string(),
+				title: z.string(),
+				caption: z.string().optional(),
+			}),
+		)
+		.default([]),
 });
 
 const blogSchema = z.object({
