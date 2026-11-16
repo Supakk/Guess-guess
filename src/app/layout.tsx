@@ -34,8 +34,9 @@ export const metadata: Metadata = {
 		siteName: site.name,
 		title: `${site.name} — UX/UI design & frontend development`,
 		description: site.description,
-		url: '/',
+		images: [{ url: site.ogImage, width: 1200, height: 630, alt: site.name }],
 	},
+	twitter: { card: 'summary_large_image', images: [site.ogImage] },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

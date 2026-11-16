@@ -1,6 +1,8 @@
 export const site = {
 	name: 'Eunyu Studio',
-	url: 'https://example.com',
+	url: 'https://guess-guess.vercel.app',
+	/** Link-preview image (1200×630) for Instagram, LINE, Slack and the like. */
+	ogImage: '/og.png',
 	description: 'UX/UI design and frontend development studio — we find what is actually broken in your product experience, then design and build the fix.',
 	location: 'Bangkok / Working worldwide',
 };
