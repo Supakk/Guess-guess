@@ -29,9 +29,12 @@ export default async function BlogIndexPage() {
 							<h2 className="text-2xl">{post.data.title}</h2>
 							<p className="mt-2 text-[#a89a86]">{post.data.summary}</p>
 						</div>
-						<time className="text-sm text-[#a89a86]" dateTime={post.data.published.toISOString()}>
-							{post.data.published.toLocaleDateString('en-GB', { year: 'numeric', month: 'short' })}
-						</time>
+						<div className="flex items-center justify-between gap-6 text-sm md:flex-col md:items-end">
+							<time className="text-[#a89a86]" dateTime={post.data.published.toISOString()}>
+								{post.data.published.toLocaleDateString('en-GB', { year: 'numeric', month: 'short' })}
+							</time>
+							<span className="text-[#c1734a]">Read note →</span>
+						</div>
 					</Link>
 				))}
 			</div>

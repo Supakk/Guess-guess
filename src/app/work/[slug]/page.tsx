@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Mdx from '@/components/mdx/Mdx';
 import AutoVideo from '@/components/ui/AutoVideo';
@@ -47,7 +48,10 @@ export default async function WorkDetailPage({ params }: Params) {
 	);
 
 	return (
-		<article className="container py-20 md:py-32">
+		<article className="container py-16 md:py-32">
+			<Link href="/work" className="reveal link-sweep mb-8 inline-flex min-h-11 items-center text-sm text-[#a89a86] hover:text-[#f6f0e6]">
+				← All case studies
+			</Link>
 			<p className="eyebrow reveal">
 				{project.data.client} / {project.data.year} / {project.data.tags.join(', ')}
 			</p>
@@ -62,7 +66,7 @@ export default async function WorkDetailPage({ params }: Params) {
 							href={project.data.url}
 							target="_blank"
 							rel="noopener noreferrer"
-							className="press btn-arrow rounded-full bg-[#f6f0e6] px-6 py-3 text-sm text-[#15120d] hover:bg-[#c1734a]"
+							className="press btn-arrow min-h-12 grow justify-center rounded-full bg-[#f6f0e6] px-6 py-3 text-sm text-[#15120d] hover:bg-[#c1734a] sm:grow-0"
 						>
 							<span className="ba-label">Visit live site</span>
 							{arrow}
@@ -73,7 +77,7 @@ export default async function WorkDetailPage({ params }: Params) {
 							href={project.data.repo}
 							target="_blank"
 							rel="noopener noreferrer"
-							className="glass press btn-arrow rounded-full px-6 py-3 text-sm hover:bg-[#c1734a]/30"
+							className="glass press btn-arrow min-h-12 grow justify-center rounded-full px-6 py-3 text-sm hover:bg-[#c1734a]/30 sm:grow-0"
 						>
 							<span className="ba-label">View code on GitHub</span>
 							{arrow}

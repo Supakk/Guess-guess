@@ -59,12 +59,12 @@ export default function ProjectOverview({ project }) {
 					{facts.map((fact, index) => (
 						<div
 							key={fact.label}
-							className={`flex flex-col-reverse px-6 py-6 sm:px-8 md:px-12 ${index % 2 ? 'border-l' : ''} ${
+							className={`flex flex-col-reverse px-5 py-5 sm:px-8 sm:py-6 md:px-12 ${index % 2 ? 'border-l' : ''} ${
 								index >= 2 ? 'border-t md:border-t-0' : ''
 							} ${index > 0 ? 'md:border-l' : ''} border-[#332c22]`}
 						>
 							<dt className="mt-1 text-sm text-[#a89a86]">{fact.label}</dt>
-							<dd className="text-3xl tracking-tight text-[#f6f0e6] md:text-4xl">{fact.value}</dd>
+							<dd className="text-2xl tracking-tight text-[#f6f0e6] sm:text-3xl md:text-4xl">{fact.value}</dd>
 						</div>
 					))}
 				</dl>

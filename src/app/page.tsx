@@ -14,14 +14,14 @@ export default async function HomePage() {
 				<h1 className="display reveal mt-8 max-w-5xl">
 					Useful things,
 					<br />
-					<em className="font-pixel not-italic text-[#a15c34]">beautifully</em> made.
+					<em className="font-pixel not-italic text-[#a15c34] max-sm:text-[0.8em]">beautifully</em> made.
 				</h1>
 				<div className="mt-12 flex flex-col justify-between gap-8 border-t border-[#332c22] pt-5 md:flex-row">
 					<p className="reveal max-w-sm text-lg leading-7 text-[#a89a86]">
 						We find what is actually broken in your product experience — then design and build the fix.
 					</p>
 					<Link
-						className="glass reveal press btn-arrow w-fit rounded-full px-5 py-4 text-sm hover:bg-[#c1734a]/30"
+						className="glass reveal press btn-arrow min-h-12 w-full justify-center rounded-full px-5 py-4 text-sm hover:bg-[#c1734a]/30 sm:w-fit"
 						href="/work"
 					>
 						<span className="ba-label">See problems we&apos;ve solved</span>
@@ -68,9 +68,9 @@ export default async function HomePage() {
 				<div className="mt-10 grid gap-10">
 					{serviceDetails.map((service, index) => (
 						<article key={service.title} data-reveal>
-							<span className="text-sm text-[#a15c34]">0{index + 1}</span>
+							<span className="text-sm text-[#c1734a]">0{index + 1}</span>
 							<h3 className="mt-3 text-xl">{service.problem}</h3>
-							<p className="mt-1 text-sm text-[#a15c34]">{service.title}</p>
+							<p className="mt-1 text-sm text-[#c1734a]">{service.title}</p>
 							<p className="mt-2 leading-7 text-[#a89a86]">{service.body}</p>
 						</article>
 					))}
@@ -120,9 +120,12 @@ export default async function HomePage() {
 						>
 							<h3 className="text-xl">{post.data.title}</h3>
 							<p className="text-[#a89a86]">{post.data.summary}</p>
-							<time className="text-sm text-[#a89a86]" dateTime={post.data.published.toISOString()}>
-								{post.data.published.toLocaleDateString('en-GB', { year: 'numeric', month: 'short' })}
-							</time>
+							<div className="mt-1 flex items-center justify-between text-sm">
+								<time className="text-[#a89a86]" dateTime={post.data.published.toISOString()}>
+									{post.data.published.toLocaleDateString('en-GB', { year: 'numeric', month: 'short' })}
+								</time>
+								<span className="text-[#c1734a]">Read note →</span>
+							</div>
 						</Link>
 					))}
 				</div>
