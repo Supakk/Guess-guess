@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Pixelify_Sans } from 'next/font/google';
 import '@/styles/global.css';
 
@@ -13,6 +13,14 @@ import RouteTransition from '@/components/motion/RouteTransition';
 import SiteFooter from '@/components/ui/SiteFooter';
 import SiteHeader from '@/components/ui/SiteHeader';
 import { site } from '@/lib/site';
+
+export const viewport: Viewport = {
+	width: 'device-width',
+	initialScale: 1,
+	// Lets the page run under the notch / home bar; .container pads itself back with env(safe-area-inset-*).
+	viewportFit: 'cover',
+	themeColor: '#15120d',
+};
 
 export const metadata: Metadata = {
 	metadataBase: new URL(site.url),
