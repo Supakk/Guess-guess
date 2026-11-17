@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { navItems } from '@/lib/site';
+import MobileNav from './MobileNav';
 
 /** Roughly where the floating pill sits, in viewport px from the top. */
 const NAV_PROBE_Y = 40;
@@ -12,9 +13,9 @@ const NAV_PROBE_Y = 40;
  * Glass pill nav that collapses to just the logo on scroll and reopens on
  * click. Any subsequent scroll re-collapses it, even if opened manually.
  *
- * Below md there is nothing to navigate to — the home route folds every
- * other page into one scrolling mobile experience (see page.tsx) — so the
- * nav links and CTA stay md-only and mobile only ever shows the wordmark.
+ * Below md the home route folds every other page into one scrolling page
+ * (see page.tsx), so phones get MobileNav instead: a pill with a labelled
+ * Menu button that stays put while scrolling.
  *
  * The wordmark's contrast is decided by probing whatever section currently
  * sits behind the pill (via [data-nav-theme] markers), not mix-blend-mode —
@@ -59,8 +60,10 @@ export default function SiteHeader() {
 	);
 
 	return (
-		<div className="container sticky top-4 z-50 pt-4">
-			<header className="glass glass-nav flex w-fit max-w-full items-center rounded-full px-5 py-3 md:px-6">
+		// The wrapper spans the page width, so it must not swallow taps meant for what is under it.
+		<div className="container pointer-events-none sticky top-4 z-50 pt-4">
+			<MobileNav pathname={pathname} />
+			<header className="glass glass-nav pointer-events-auto hidden w-fit max-w-full items-center rounded-full px-5 py-3 md:flex md:px-6">
 				{expanded ? (
 					<Link href="/" className="text-lg font-semibold tracking-tight" aria-label="Eunyu Studio home">
 						{wordmark}
